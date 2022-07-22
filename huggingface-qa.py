@@ -29,3 +29,7 @@ def lambda_handler(event, context):
         'statusCode': 200,
         'body': json.dumps('Image Face Detection & Analysis Event Recorded!')
     }
+
+  #Generate the answers to the question.
+  def genAnswers(question, context, topn):
+    df = pd.DataFrame(nlp(question=question, context=text, topk = topn, handle_impossible_answer=False))
