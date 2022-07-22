@@ -25,4 +25,7 @@ def lambda_handler(event, context):
     #sSrcExtension = event["detail"]["ProcessExtension"]
     #sAssetId = event["detail"]["AssetId"]
     
-    
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Image Face Detection & Analysis Event Recorded!')
+    }
