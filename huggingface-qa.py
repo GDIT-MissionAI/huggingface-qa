@@ -11,13 +11,19 @@ nlp = pipeline("question-answering")
 #load clients
 s3Client = boto3.client('s3')
 
+#Results
+dfResult = ""
+
 def lambda_handler(event, context):
-  
     sQuestion = event.get("Question")
     sContext = event.get("Context")
     if (sContext = ""):
       sBucket = event.get("Bucket")
       sKey = event.get("Key")
+      sContext = getContent(sBucket, sKey)
+    
+    #Get Results
+    dfResult = genAnswers(sQuestion, sContext, 11).to_string(header = True, index = False)
     
     #event_dict = json.loads(event) #if "key" in "dict"
     #sSrcBucket = event["detail"]["ProcessOutputBucket"]
@@ -27,9 +33,20 @@ def lambda_handler(event, context):
     
     return {
         'statusCode': 200,
-        'body': json.dumps('Image Face Detection & Analysis Event Recorded!')
+        'body': dfResult
     }
 
+  #grab s3 object with text content
+  def getContent(srcBucket, srcKey):
+    objContent = s3Client.get_object(Bucket=srcBucket, Key=srcKey)
+    response = objContent['Body'].read()
+    return response
+  
   #Generate the answers to the question.
   def genAnswers(question, context, topn):
-    df = pd.DataFrame(nlp(question=question, context=text, topk = topn, handle_impossible_answer=False))
+    df = pd.DataFrame(nlp(question=question, context=text, topk = topn, handle_impossible_answer=True))
+    return df
+#    for i in range(min(len(df), topn)):
+#      df.iloc[i]["answer"]
+#      #columns: answer, score, start, end
+      
