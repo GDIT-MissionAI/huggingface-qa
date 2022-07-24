@@ -25,7 +25,8 @@ def lambda_handler(event, context):
     #Get Results
     if sQuestion != "" and sContext != "": #Ensure values are populated
         dfResult = genAnswers(sQuestion, sContext, 11).to_string(header = True, index = False) #get answers
-    
+        print(dfResult)
+        
     #event_dict = json.loads(event) #if "key" in "dict"
     #sSrcBucket = event["detail"]["ProcessOutputBucket"]
     #sSrcKey = event["detail"]["ProcessOutputKey"]
