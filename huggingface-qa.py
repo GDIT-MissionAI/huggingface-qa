@@ -23,7 +23,8 @@ def lambda_handler(event, context):
       sContext = getContent(sBucket, sKey)
     
     #Get Results
-    dfResult = genAnswers(sQuestion, sContext, 11).to_string(header = True, index = False)
+    if sQuestion != "" and sContext != "": #Ensure values are populated
+        dfResult = genAnswers(sQuestion, sContext, 11).to_string(header = True, index = False) #get answers
     
     #event_dict = json.loads(event) #if "key" in "dict"
     #sSrcBucket = event["detail"]["ProcessOutputBucket"]
@@ -33,7 +34,7 @@ def lambda_handler(event, context):
     
     return {
         'statusCode': 200,
-        'body': dfResult
+        'body': dfResult #return answers to caller
     }
 
   #grab s3 object with text content
