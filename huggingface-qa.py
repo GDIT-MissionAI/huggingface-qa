@@ -45,8 +45,8 @@ def getContent(srcBucket, srcKey):
     return response
   
 #Generate the answers to the question.
-def genAnswers(question, context, topn):
-    df = pd.DataFrame(nlp(question=question, context=text, topk = topn, handle_impossible_answer=True))
+def genAnswers(iquestion, icontext, topn):
+    df = pd.DataFrame(nlp(question=iquestion, context=icontext, topk = topn, handle_impossible_answer=True))
     return df
 #    for i in range(min(len(df), topn)):
 #      df.iloc[i]["answer"]
