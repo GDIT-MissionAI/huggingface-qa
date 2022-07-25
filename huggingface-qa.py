@@ -17,7 +17,7 @@ dfResult = ""
 def lambda_handler(event, context):
     sQuestion = event.get("Question")
     sContext = event.get("Context")
-    if (sContext = ""):
+    if (sContext == ""):
       sBucket = event.get("Bucket")
       sKey = event.get("Key")
       sContext = getContent(sBucket, sKey)
