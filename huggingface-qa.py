@@ -38,14 +38,14 @@ def lambda_handler(event, context):
         'body': dfResult #return answers to caller
     }
 
-  #grab s3 object with text content
-  def getContent(srcBucket, srcKey):
+#grab s3 object with text content
+def getContent(srcBucket, srcKey):
     objContent = s3Client.get_object(Bucket=srcBucket, Key=srcKey)
     response = objContent['Body'].read()
     return response
   
-  #Generate the answers to the question.
-  def genAnswers(question, context, topn):
+#Generate the answers to the question.
+def genAnswers(question, context, topn):
     df = pd.DataFrame(nlp(question=question, context=text, topk = topn, handle_impossible_answer=True))
     return df
 #    for i in range(min(len(df), topn)):
