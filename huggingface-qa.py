@@ -38,7 +38,7 @@ def lambda_handler(event, context):
         'headers': {
             'Access-Control-Allow-Origin': '*'
         },
-        'body': dfResult #return answers to caller
+        'body': dfResult.to_json() #return answers to caller
     }
 
 #grab s3 object with text content
