@@ -15,6 +15,7 @@ s3Client = boto3.client('s3')
 dfResult = pd.DataFrame(columns=['A', 'B', 'C'], index=range(5))
 
 def lambda_handler(event, context):
+    print(json.dumps(event))
     sQuestion = event.get("Question")
     sContext = event.get("Context")
     if (sContext == ""):
@@ -25,7 +26,10 @@ def lambda_handler(event, context):
     #Get Results
     if sQuestion != "" and sContext != "": #Ensure values are populated
         #dfResult = genAnswers(sQuestion, sContext, 11).to_string(header = True, index = False) #get answers
+        print(sQuestion)
+        print(sContext)
         dfResult = genAnswers(sQuestion, sContext, 11) #get answers
+        print(json.dumps(dfResult.to_json(orient="records")))
         #print(dfResult)
         
     #event_dict = json.loads(event) #if "key" in "dict"
