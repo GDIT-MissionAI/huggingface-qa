@@ -4,7 +4,8 @@ import json
 import boto3
 import botocore
 from base64 import b64encode
-#os.environ['TRANSFORMERS_CACHE'] = '/tmp'
+import os
+os.environ['TRANSFORMERS_CACHE'] = '/tmp'
 
 #load pipeline
 nlp = pipeline("question-answering")
