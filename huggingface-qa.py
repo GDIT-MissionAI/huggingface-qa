@@ -30,6 +30,7 @@ def lambda_handler(event, context):
         print(sQuestion)
         print(sContext)
         dfResult = genAnswers(sQuestion, sContext, 11) #get answers
+        dfResult = dfResult[dfResult['answer'].str.len() > 0]
         print(json.dumps(dfResult.to_json(orient="records")))
         #print(dfResult)
         
