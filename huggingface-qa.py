@@ -1,11 +1,11 @@
+import os
+os.environ['TRANSFORMERS_CACHE'] = '/tmp'
 from transformers import pipeline
 import pandas as pd
 import json
 import boto3
 import botocore
 from base64 import b64encode
-import os
-os.environ['TRANSFORMERS_CACHE'] = '/tmp'
 
 #load pipeline
 nlp = pipeline("question-answering")
