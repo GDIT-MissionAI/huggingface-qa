@@ -8,7 +8,8 @@ import botocore
 from base64 import b64encode
 
 #load pipeline
-nlp = pipeline("question-answering")
+#nlp = pipeline("question-answering")
+nlp = pipeline(task = "question-answering", model = "./models/distilbert-base-cased-distilled-squad", tokenizer ="./models/distilbert-base-cased-distilled-squad")
 
 #load clients
 s3Client = boto3.client('s3')
